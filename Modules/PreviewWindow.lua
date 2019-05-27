@@ -22,8 +22,9 @@ Preview.raceids = {
   Pandaren = 25,
 }
 Preview.classes = {}
-Preview.attributes = PAPERDOLL_STATCATEGORIES[1].stats
-local temp = PAPERDOLL_STATCATEGORIES.ENHANCEMENTS.stats
+Preview.attributes = PAPERDOLL_STATCATEGORIES[1].stats  --AttributesCategory
+local temp = PAPERDOLL_STATCATEGORIES[2].stats 			--EnhancementsCategory
+--local temp = PAPERDOLL_STATINFO.ENHANCEMENTS.stats
 Preview.enhancements = {}
 for i=1,#temp do
   Preview.enhancements[i] = temp[i]
