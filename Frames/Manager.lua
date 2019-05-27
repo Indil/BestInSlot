@@ -189,13 +189,13 @@ function Manager:FillSelectContainer(itemGroup, raidTier, difficulty, slotid)
   selectContainer:AddChild(simpleGroup)
   local lootOrder
   if relic then
-    lootOrder = self.Artifacts:GetRelicsForRaidTier(relic, raidTier, difficulty, lowerRaidTiers)
+	lootOrder = self.Artifacts:GetRelicsForRaidTier(relic, raidTier, difficulty, lowerRaidTiers)
   else
     if showAllItems then
       lootOrder = self:GetLootOrder(self:GetLootTableBySlot(raidTier, slotid, difficulty, lowerRaidTiers))
     else
       local list, spec = self:GetSelected(self.SPECIALIZATION)
-      lootOrder = self:GetLootOrder(self:GetPersonalizedLootTableBySlot(raidTier, slotid, difficulty, spec, lowerRaidTiers))
+      lootOrder = self:GetLootOrder(self:GetPersonalizedLootTableBySlot(raidTier, slotid, difficulty, spec, lowerRaidTiers, _, list))
     end
   end
   local deselectIcon = AceGUI:Create("InteractiveLabel")
@@ -209,25 +209,45 @@ function Manager:FillSelectContainer(itemGroup, raidTier, difficulty, slotid)
   scroll:AddChild(deselectIcon)
   local firstItem
   for i = 1, #lootOrder do
+	local includedifficulty = true
     local id = lootOrder[i]
     local texture = GetItemIcon(id)
     local label = self:GetItemLinkLabel(id, difficulty)
-    if lowerRaidTiers then
+	if raidTier == 70003 then --fix description for LegionDungeons
+	  local item = BestInSlot:GetItem(id)
+	  
+	  local Arc = "Arc" --Arcway
+	  local CoS = "CoS" --Court of Stars
+	  local RtK = "RtK" --Karazhan
+	  local CoEN = "CoEN" --CathedralOfEthernalNight
+	  local excludedungeons = (item.dungeon == RtK or item.dungeon == CoEN or item.dungeon == CoS or item.dungeon == Arc)
+	  --print(item.dungeon)
+	  
+	  if excludedungeons and difficulty == 1 then --fix dungeons exclusion on normal difficulty
+		includedifficulty = false
+	  end
+	  if item.misc ~= "LOOT_JOURNAL_LEGENDARIES" then
+		label:SetText(label:GetUserData("itemlink")..(" - (%s)"):format(self:GetDescription(self.INSTANCE, item.dungeon)))
+	  end
+	end  
+	if lowerRaidTiers then
       local item = BestInSlot:GetItem(id)
       local itemRaidTier = self:GetRaidTiers(self.INSTANCE, item.dungeon)
-      if itemRaidTier ~= raidTier then
+      if itemRaidTier ~= raidTier and item.misc ~= "LOOT_JOURNAL_LEGENDARIES" then --fix description RaidTier for LOOT_JOURNAL_LEGENDARIES items
         label:SetText(label:GetUserData("itemlink")..(" - (%s)"):format(self:GetDescription(self.RAIDTIER, itemRaidTier)))
       end
     end
-    label:SetFullWidth(true)
-    label:SetHighlight(itemhighlight)
-    label:SetImageSize(30,30)
-    local callbacks = label:GetUserData("callbacks")
-    callbacks.OnClick = {selectItemLabelOnClick}
-    callbacks.OnEnter = {selectItemLabelOnEnter}
-    label:SetFont(GameFontNormalSmall:GetFont(), 14, nil)
-    firstItem = firstItem or label
-    scroll:AddChild(label)
+	if includedifficulty == true then
+		label:SetFullWidth(true)
+		label:SetHighlight(itemhighlight)
+		label:SetImageSize(30,30)
+		local callbacks = label:GetUserData("callbacks")
+		callbacks.OnClick = {selectItemLabelOnClick}
+		callbacks.OnEnter = {selectItemLabelOnEnter}
+		label:SetFont(GameFontNormalSmall:GetFont(), 14, nil)
+		firstItem = firstItem or label
+		scroll:AddChild(label)
+	end
   end
   if not relic then
     local showAllLabel = AceGUI:Create("InteractiveLabel")
@@ -261,10 +281,11 @@ function Manager:FillSelectContainer(itemGroup, raidTier, difficulty, slotid)
     lowerRaidTierLabel:SetFont(GameFontNormalSmall:GetFont(), 14, nil)
     lowerRaidTierLabel:SetImage(lowerRaidTiers and "Interface\\BUTTONS\\UI-GroupLoot-Pass-Up" or "Interface\\PaperDollInfoFrame\\Character-Plus")
     lowerRaidTierLabel:SetText(lowerRaidTiers and L["Only show this raid tier"] or L["Add lower raid tiers"])
-    lowerRaidTierLabel:SetCallback("OnClick", function() lowerRaidTiers = not lowerRaidTiers Manager:FillSelectContainer(itemGroup, raidTier, difficulty, slotid) end)
-    scroll:AddChild(lowerRaidTierLabel)    
+	lowerRaidTierLabel:SetCallback("OnClick", function() lowerRaidTiers = not lowerRaidTiers Manager:FillSelectContainer(itemGroup, raidTier, difficulty, slotid) end)
+    scroll:AddChild(lowerRaidTierLabel)
   end
 end
+
 function Manager:HideItemList(callback, ...)
   local raidtier = self:GetSelected(self.RAIDTIER)
   for i=1,#itemSelectionMode do
@@ -394,7 +415,9 @@ local function iconOnEnter(icon)
     Manager:GetItemTooltip(itemid, Manager:GetSelected(Manager.DIFFICULTY), Manager.frame, itemLink)
   end
 end
+
 local function iconOnLeave() Manager:HideItemTooltip()  end
+
 local function iconOnClick(widget, _, button)
   local itemid = widget:GetUserData("itemid")
   local shift, ctrl = IsShiftKeyDown(), IsControlKeyDown()
@@ -433,7 +456,6 @@ end
 local function selectItemButtonOnClick(widget)
   Manager:ShowItemList(widget)
 end
-
 
 function Manager:SetLegionRelics(enabled, container, specialization, bis)
   if enabled then
@@ -534,6 +556,7 @@ function Manager:PopulateSlots(slotContainer)
   
   self:SetLegionRelics(raidTier >= 70000 and raidTier < 80000, container, specialization, BiSList)
 end
+
 function Manager:GetItemSelectionGroup(slotId, textureName, bisIndex)
   local itemGroup = AceGUI:Create("SimpleGroup")
   itemGroup:SetHeight(45)
@@ -575,6 +598,7 @@ function Manager:GetItemSelectionGroup(slotId, textureName, bisIndex)
   itemGroup:SetRelativeWidth(0.48)
   return itemGroup
 end
+
 function Manager:GetSlotContainer(raidTier, difficulty)
   local container = AceGUI:Create("SimpleGroup")
   itemGroups = {}
@@ -750,9 +774,11 @@ Manager:RegisterTutorials(frameName,{
   [4] = {text = L["When you've set a difficulty before, you can easily import a previously set list."], onRequest = true, xOffset = 0, yOffset = 0, container="content", element="importButton", DownArrow = true},
   [5] = {text = L["When selecting rings or trinkets, you can see both items at once."], text2 = L["Use left-click to (de)select the left one, and right-click to select the right one"], xOffset = -200, yOffset = -50, container = "content", element = "selectedItem", onRequest = true, UpArrow = true},
 })
+
 local function cancel()
  dropdownImport:SetValue(nil)
 end
+
 local function doImport()
   Manager:DoImport()
   cancel()
