@@ -84,6 +84,7 @@ function Credits:Draw(container)
   header:SetFullWidth(true)
   scroll:AddChild(header)
   scroll:AddChild(self:CreateTesterLabel("Sannath", "Elune-EU", "DRUID", "A"))
+  scroll:AddChild(self:CreateTesterLabel("Indil", "Felsong @FREAKZ", "MONK", "H"))
   
   local header = AceGUI:Create("Heading")
   header:SetText("Official websites")
