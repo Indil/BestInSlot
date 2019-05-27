@@ -1,4 +1,7 @@
 # A fork of the abandoned Best In Slot AddOn.
+
+***
+
 ## FAQ
 ### Q: Can I disable the window resizing/make it instant?
 #### A: Go to **Options** -&gt; Animation. Check the boxes to disable or make the animations instant.
@@ -8,6 +11,8 @@
 #### A: Capture the bug with an AddOn like Swatter or BugSack and report the output to the [BestInSlotRedux GitHub](https://github.com/Indil/BestInSlot/issues).
 ### Q: These localization's are really weird, wrong or missing.
 #### A: When I took over the project so were the original translation files unfortunately lost. Please help at the project's localization page.
+
+***
 
 # Best In Slot Quick Start Guide
 
