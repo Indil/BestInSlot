@@ -1,4 +1,4 @@
-# A fork of the abandoned Best In Slot AddOn.
+# A fork of the abandoned Best In Slot addon.
 (optimized for patch 7.2.5)
 
 ***
