@@ -12,12 +12,15 @@ local mapIds = {}
 local npcIds = {}
 
 function ZoneDetect:OnEnable()
-  self:RegisterEvent("WORLD_MAP_UPDATE")
-  self:WORLD_MAP_UPDATE()
+  --self:RegisterEvent("WORLD_MAP_UPDATE")
+  --self:WORLD_MAP_UPDATE()
+  self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+  self:ZONE_CHANGED_NEW_AREA()
 end
 
 function ZoneDetect:OnDisable()
-  self:UnregisterEvent("WORLD_MAP_UPDATE")
+  --self:UnregisterEvent("WORLD_MAP_UPDATE")
+  self:UnregisterEvent("ZONE_CHANGED_NEW_AREA")
 end
 
 function ZoneDetect:EnableBossTracking()
@@ -63,7 +66,12 @@ function ZoneDetect:GetItemText(item)
   local specs = {}
   if item.isBiS and item.isBiS[diffic] then
     for k,v in pairs(item.isBiS[diffic]) do
-      local specName = select(2, GetSpecializationInfoByID(k))
+      local specName
+	  if tonumber(k) ~= nil then
+		specName = select(2, GetSpecializationInfoByID(k)) --error on custom lists can't detect spec
+	  else
+		specName = k
+	  end
       tinsert(specs, (activeSpec == k and self.colorHighlight or self.colorDisable)..specName..self.colorNormal)
     end
   end
@@ -133,7 +141,8 @@ function ZoneDetect:TooltipSetUnit(tooltip)
   end 
 end
 
-function ZoneDetect:WORLD_MAP_UPDATE()
+--function ZoneDetect:WORLD_MAP_UPDATE()
+function ZoneDetect:ZONE_CHANGED_NEW_AREA()
   if not waitingForMovement then
     self:RegisterEvent("PLAYER_STARTED_MOVING")
     waitingForMovement = true
