@@ -10,8 +10,6 @@
 #### A: It's not tied to any specc so you need to click "Show all items" to see it in the list.
 ### Q: I've encountered a bug! How can I report it?
 #### A: Capture the bug with an AddOn like Swatter or BugSack and report the output to the [BestInSlotRedux GitHub](https://github.com/Indil/BestInSlot/issues).
-### Q: These localization's are really weird, wrong or missing.
-#### A: When I took over the project so were the original translation files unfortunately lost. Please help at the project's localization page.
 
 ***
 
