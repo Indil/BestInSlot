@@ -49,12 +49,13 @@ You can export your BiS lists to WoWhead or SimulationCraft.
 ![](https://i.imgur.com/b4qOwvi.png)
 
 ## Cool. Can this somehow help seeing who needs which item too?
+
 Yes it can! With the Request BiS panel can you automatically fetch your raids, guild members or a whisper target's BiS lists and see how many people that need an item from each boss.
 ![](https://i.imgur.com/HlN4NHb.png)
 
 You can also report your BiS list to chat channels. You can do that at the bottom of the Overview window. This looks like the screenshot below:  
 ![](https://i.imgur.com/EU1TcAt.png)
 
-## There's more!
+## There's more...
 
 There's more that's especially interesting for guilds to use! I'll post those news as soon.
