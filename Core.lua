@@ -18,6 +18,7 @@ BestInSlot.options = {}
 BestInSlot.defaultModuleState = false
 BestInSlot.options.DEBUG = false
 BestInSlot.Author = ("%s%s @ %s"):format("|c"..RAID_CLASS_COLORS.DEMONHUNTER.colorStr, "Beleria".."|r",ConvertRGBtoColorString(PLAYER_FACTION_COLORS[1]).."Argent Dawn-EU|r")
+BestInSlot.Developer = ("%s%s @ %s"):format("|c"..RAID_CLASS_COLORS.MONK.colorStr, "Indil".."|r",ConvertRGBtoColorString(PLAYER_FACTION_COLORS[0]).."Felsong FREAKZ|r")
 --@non-debug@ 
 BestInSlot.version = 450 
 --@end-non-debug@
