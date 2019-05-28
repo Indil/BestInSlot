@@ -110,6 +110,7 @@ function Credits:Draw(container)
   scroll:AddChild(self:CreateTranslatorLabel(FRFR,  "Kalissar"))
   scroll:AddChild(self:CreateTranslatorLabel(ESES,  "Luskaner"))
   scroll:AddChild(self:CreateTranslatorLabel(ZHCN,"nrg3331"))
+  scroll:AddChild(self:CreateTranslatorLabel(LFG_LIST_LANGUAGE_ITIT,"Indil")) -- new
   scroll:AddChild(self:CreateUneditableTextbox("http://wow.curseforge.com/addons/bestinslot/localization/", "Want to help translate BestInSlot?"))
   
   local header = AceGUI:Create("Heading")
