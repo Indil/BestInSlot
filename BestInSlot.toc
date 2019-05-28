@@ -2,7 +2,6 @@
 ## Title: Best In Slot
 ## Notes: Keep track of your, your raid member, and your guilds Best in Slot list!
 ## Author: Beleria @ Argent Dawn-EU
-## Developer: Indil Felsong @FREAKZ
 ## Version: Release 7.2.5
 ## SavedVariables: BestInSlotDB
 
