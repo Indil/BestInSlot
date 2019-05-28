@@ -206,7 +206,7 @@ function RequestBiS:Draw(container)
   dropdownRequestFrom:SetList({
     RAID = ("%s/%s"):format(_G["PARTY"], _G["RAID"]),
     GUILD = _G["GUILD"],
-    WHISPER = _G["WHISPER"],    
+    WHISPER = string.match(CHAT_MSG_WHISPER,"([A-Z]%w+)"), --old value _G["WHISPER"] 
   })
   container:SetUserData("request", dropdownRequestFrom)
   if not IsInGuild() then
