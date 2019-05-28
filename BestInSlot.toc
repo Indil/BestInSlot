@@ -2,6 +2,7 @@
 ## Title: Best In Slot
 ## Notes: Keep track of your, your raid member, and your guilds Best in Slot list!
 ## Author: Beleria @ Argent Dawn-EU
+## Developer: Indil Felsong @FREAKZ
 ## Version: Release 7.2.5
 ## SavedVariables: BestInSlotDB
 
@@ -16,11 +17,4 @@ Utils\ExportRaid.lua
 Utils\ItemInfo.lua
 Modules\BisLink.lua
 Modules\PreviewWindow.lua
-#Modules\LegionModule\LegionLegendaries.lua
-#Modules\LegionModule\EmeraldNightmare.lua
-#Modules\LegionModule\Nighthold.lua
-#Modules\LegionModule\LegionArtifact.lua
-#Modules\LegionModule\TrialOfValor.lua
-#Modules\LegionModule\TombOfSargeras.lua
-#Modules\LegionDungeon\BestInSlotRedux_LegionDungeons.lua
 #@end-do-not-package@
