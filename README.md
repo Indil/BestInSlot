@@ -35,16 +35,26 @@ For instance, a shaman can have 3 specializations for Highmaul Heroic, one for E
 The manager will show you a copy of your inventory screen. For each slot you can set a BestInSlot item. The Add On uses the loot list of that list, and checks if you're eligible for that loot in that slot. You'll get a list with items that you're eligible to roll for the selected raid tier, difficulty and specialization.  
 For more information about using the BiS Manager you can hover over the text at the bottom of the window.  
 The manager should look like this:  
-![](http://i.imgur.com/ZDabFEk.jpg)  
+![](https://i.imgur.com/dQK7jv9.png)
 
 ## I've setup my BestInSlot list, what is the advantage of using this Add On?
 
-I've implemented several things that are helpfull then "just making a Best In Slot list".  
 First off, you can easily check what you need from an instance on a per boss basis. How this looks is seen on the screenshot below:  
-![](http://i.imgur.com/wfPUJ16.jpg)  
-You can also report your BestInSlot to a series of channels. You can do that at the bottom of the Overview window. This looks like the screenshot below:  
-![](http://i.imgur.com/vNuG52j.jpg)
+![](https://i.imgur.com/StXZofb.png)
+
+You can make custom BiS lists if you need more than the standard one for each specc.
+![](https://i.imgur.com/zaNzKbm.png)
+
+You can export your BiS lists to WoWhead or SimulationCraft.
+![](https://i.imgur.com/b4qOwvi.png)
+
+## Cool. Can this somehow help seeing who needs which item too?
+Yes it can! With the Request BiS panel can you automatically fetch your raids, guild members or a whisper target's BiS lists and see how many people that need an item from each boss.
+![](https://i.imgur.com/HlN4NHb.png)
+
+You can also report your BiS list to chat channels. You can do that at the bottom of the Overview window. This looks like the screenshot below:  
+![](https://i.imgur.com/EU1TcAt.png)
 
 ## There's more!
 
-There's more that's especially interesting for guilds to use! More and that soon.
+There's more that's especially interesting for guilds to use! I'll post those news as soon.
