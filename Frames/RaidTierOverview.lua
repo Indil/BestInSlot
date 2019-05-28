@@ -115,7 +115,12 @@ function Overview:CheckSlotData(bisList, slotId, selectedDungeon, selectedRaidTi
   if bisList[slotId] and type(bisList[slotId].item) == "number" then
     local id = bisList[slotId].item
     local hasItem = self:HasItem(id, selectedDifficulty, true)
-    local hasItemOnHigherDifficulty = hasItem and hasItem > selectedDifficulty
+    local hasItemOnHigherDifficulty
+    if type(hasItem) == "boolean" then
+      hasItemOnHigherDifficulty = hasItem
+    else
+      hasItemOnHigherDifficulty = hasItem and hasItem > selectedDifficulty
+    end
     local item = self:GetItem(id)
     if not showObtainedOnly or not hasItem then
       if item then
