@@ -32,7 +32,7 @@ move-folders:
 	BestInSlot/Modules/Legion: BestInSlot_Legion
 	BestInSlot/Modules/LegionDungeons: BestInSlot_LegionDungeons
 
-license-output: LICENSE.txt
+license-output: LICENSE.html
 
 manual-changelog:
 	filename: CHANGELOG.txt
