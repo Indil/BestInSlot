@@ -1,8 +1,8 @@
 ## Interface: 70200
 ## Title: Best In Slot
-## Notes: Keep track of your, your raid member, and your guilds Best in Slot list!
-## Author: Beleria @ Argent Dawn-EU
-## Version: Release 7.2.5
+## Notes: Keep track of your, your raid members and your guilds Best in Slot list!
+## Author: Beleria @ Argent Dawn-EU, Indil @ Felsong FREAKZ
+## Version: @project-version@
 ## SavedVariables: BestInSlotDB
 
 Libs\Libs.xml
