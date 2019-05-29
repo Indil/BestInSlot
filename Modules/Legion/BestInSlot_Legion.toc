@@ -1,0 +1,15 @@
+## Interface: 70200
+## Title: Best In Slot [|cffff975bLegion|r]
+## Notes: Legion Module for BestInSlot
+## Author: Beleria @ Argent Dawn-EU
+## Version: Release 7.2.5
+## Dependencies: BestInSlot
+
+LegionLegendaries.lua
+EmeraldNightmare.lua
+Nighthold.lua
+TrialOfValor.lua
+LegionArtifact.lua
+TombOfSargeras.lua
+BrokenIsles.lua
+# AntorusTheburningThrone.lua
