@@ -16,4 +16,10 @@ Utils\ExportRaid.lua
 Utils\ItemInfo.lua
 Modules\BisLink.lua
 Modules\PreviewWindow.lua
+Modules\Legion\AntorusTheburningThrone.lua
+Modules\Legion\EmeraldNightmare.lua
+Modules\Legion\Nighthold.lua
+Modules\Legion\TombOfSargeras.lua
+Modules\Legion\TrialOfValor.lua
+Modules\LegionDungeons\BestInSlot_LegionDungeons.lua
 #@end-do-not-package@
