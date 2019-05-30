@@ -1,5 +1,5 @@
 <!-- *Current Version* | ![Current Version](https://img.shields.io/github/tag-date/Indil/BestInSlot.svg?style=plastic) -->
-Info | Status
+|| Status
 --- | ---
 *Last Commit* | ![Last Commit](https://img.shields.io/github/last-commit/Indil/BestInSlot.svg?style=plastic)
 *License* | ![License](https://img.shields.io/github/license/Indil/BestInSlot.svg?style=plastic)
