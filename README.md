@@ -17,7 +17,7 @@
 ### Q: I can't find [Strand of the Stars](https://www.wowhead.com/item=137487/strand-of-the-stars) under neck!
 #### A: It's not tied to any specc so you need to click "Show all items" to see it in the list.
 ### Q: I've encountered a bug! How can I report it?
-#### A: Capture the bug with an AddOn like Swatter or BugSack and report the output to the [BestInSlotRedux GitHub](https://github.com/Indil/BestInSlot/issues).
+#### A: Capture the bug with an AddOn like Swatter or BugSack and report the output to the [BestInSlot GitHub](https://github.com/Indil/BestInSlot/issues).
 
 ***
 
