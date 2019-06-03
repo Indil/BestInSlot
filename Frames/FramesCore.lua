@@ -29,7 +29,7 @@ end
 
 local function getBiggestWidth()
   if not biggestWidth then
-    biggestWidth = getWidthForModule(menuItems[1]) 
+    biggestWidth = getWidthForModule(menuItems[1])
     for i=2,#menuItems do
       local modWidth = getWidthForModule(menuItems[i])
       if modWidth > biggestWidth then
@@ -73,7 +73,7 @@ local function addGuildInfoToTooltip(tooltip, itemId, difficultyId)
           if first then
             tooltip:AddLine(L["The following people in your guild also need this item:"], nil, nil, nil, true)
             first = false
-          end 
+          end
           tooltip:AddLine(("- %s (%s)"):format(BestInSlot:GetPlayerString(player), strjoin("/", unpack(specNames))))
         end
         if #specNamesObtained > 0 then
@@ -177,8 +177,8 @@ function BestInSlot:SetMenu(id, ...)
   local args = {...}
   local item = menuItems[id]
   if selectedMenuId then
-    local selectedItem = menuItems[selectedMenuId] 
-    selectedItem:Close() 
+    local selectedItem = menuItems[selectedMenuId]
+    selectedItem:Close()
     BestInSlot:HideItemTooltip()
     wipe(container:GetUserDataTable())
     local menuLabel = menuLabels[selectedMenuId]
@@ -225,7 +225,7 @@ function BestInSlot:GetItemTooltip(itemid, difficulty, frame, itemlink)
   local item = self:GetItem(itemid, difficulty)
   local _, _, _, _, _, _, itemtype = GetItemInfo(itemid)
   local RELIC = GetItemSubClassInfo(LE_ITEM_CLASS_GEM, 11) --Artifact Relic subtype
-  
+
   if not item then return end
   playerClass = playerClass or select(3, UnitClass("player"))
   GameTooltip:SetHyperlink(item.link, playerClass, select(2, self:GetSelected(self.SPECIALIZATION)))
@@ -292,10 +292,10 @@ function BestInSlot:GameTooltip_OnTooltipSetItem(tooltip, ...)
       if itemId then
         instanceID = tonumber(instanceID)
         instanceID = tonumber(self:GetDifficultyIdForDungeon(instanceID, nil, true) or 1)
-        local bisInfo 
+        local bisInfo
         if existType == "item" then
           bisInfo = self:IsItemBestInSlot(itemId, instanceID)
-        else 
+        else
           bisInfo = self:IsTokenBestInSlot(itemId, instanceID)
         end
         local isBiS = false --catch empty tables
@@ -319,15 +319,20 @@ function BestInSlot:GameTooltip_OnTooltipSetItem(tooltip, ...)
             tooltip:AddLine(("%1$s (%2$s)"):format(color.."BestInSlot"..self.colorNormal, color..specsText.."|r"))
           end
 		--elseif bisInfo then
-			
+
         end
         local item = self:GetItem(itemId)
         if item and (self.db.char.options.tooltipSource or self.options.DEBUG) then
           if item.multiplesources then
-            tooltip:AddLine(SOURCES..":")
+            if (GetLocale() == "itIT") then
+				tooltip:AddLine("Fonti:")
+			else
+				tooltip:AddLine(SOURCES..":") -- wrong global translation (itIT)
+			end
             for dungeonname,v in pairs(item.multiplesources) do
               for bossid in pairs(v) do
-                tooltip:AddLine(("%s%s %s(%s)|r"):format(self.colorHighlight, self:GetDescription(self.BOSS, dungeonname, bossid), self.colorNormal, dungeonname))
+				dung = data.instances[dungeonname].description -- changed dungeonname to full name
+                tooltip:AddLine(("%s%s %s(%s)|r"):format(self.colorHighlight, self:GetDescription(self.BOSS, dungeonname, bossid), self.colorNormal, dung))
               end
             end
           elseif item.dungeon and item.bossid then
@@ -356,7 +361,7 @@ local function helperOnEnter(widget, ...)
   else
     ResetCursor()
   end
-  
+
   if callbacks.OnEnter then
     for i=1,#callbacks.OnEnter do
       callbacks.OnEnter[i](widget, ...)
@@ -370,7 +375,7 @@ local function helperOnLeave(widget, ...)
   BestInSlot:HideItemTooltip()
   if callbacks.OnLeave then
     for i=1,#callbacks.OnLeave do
-      callbacks.OnLeave[i](widget, ...) 
+      callbacks.OnLeave[i](widget, ...)
     end
   end
 end
@@ -388,7 +393,7 @@ local function helperOnClick(widget, ...)
   end
   if callbacks.OnClick then
     for i=1,#callbacks.OnClick do
-      callbacks.OnClick[i](widget, ...) 
+      callbacks.OnClick[i](widget, ...)
     end
   end
 end
@@ -442,7 +447,7 @@ local UISpecialFramesId
 local function frameClosed(widget)
   if UISpecialFrames[UISpecialFramesId] == frameName then
     tremove(UISpecialFrames, UISpecialFramesId)
-  end  
+  end
   BestInSlot:HideFrame()
 end
 
@@ -451,7 +456,7 @@ local function GetFrame()
   frame = AceGUI:Create("Frame")
   frame.frame:SetFrameStrata("HIGH")
   BestInSlot.frame = frame
-  
+
   --make closable with escape
   _G[frameName] = frame.frame
   tinsert(UISpecialFrames, frameName)
@@ -489,7 +494,7 @@ local function GetFrame()
   end
   frame:PauseLayout()
   frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 200, -250)
-  
+
   if not BestInSlot.hasModules then
     local label = AceGUI:Create("Label")
     label:SetText(L["This addon requires atleast 1 expansion module! Please enable one!"])
@@ -498,7 +503,7 @@ local function GetFrame()
     frame:AddChild(label)
     return
   end
-  
+
   menuContainer = AceGUI:Create("SimpleGroup")
   menuContainer:SetPoint("TOPLEFT", frame.frame, "TOPLEFT", 10, -20)
   menuContainer:SetPoint("BOTTOMRIGHT", frame.frame, "BOTTOMLEFT", 160, 50)
@@ -514,7 +519,7 @@ local function GetFrame()
       interactiveLabel:SetFont(GameFontNormalSmall:GetFont(), 14, nil)
       interactiveLabel:SetUserData("name", item.Description)
       interactiveLabel:SetUserData("id", i)
-      
+
       if selectedMenuId and selectedMenuId == i then
         interactiveLabel:SetHighlight("Interface\\QuestFrame\\UI-QuestLogTitleHighlight")
         interactiveLabel:SetColor(1,1,1)
@@ -528,29 +533,29 @@ local function GetFrame()
         interactiveLabel:SetPoint("TOPRIGHT", menuContainer.frame, "TOPRIGHT", -10, -10)
       else
         interactiveLabel:SetPoint("TOPLEFT", previousLabel.frame, "BOTTOMLEFT", 0, -10)
-        interactiveLabel:SetPoint("TOPRIGHT", previousLabel.frame, "BOTTOMRIGHT", 0, -10)    
+        interactiveLabel:SetPoint("TOPRIGHT", previousLabel.frame, "BOTTOMRIGHT", 0, -10)
       end
       previousLabel = interactiveLabel
       menuLabels[i] = interactiveLabel
       menuContainer:AddChild(interactiveLabel)
     end
   end
-  
+
   frame:AddChild(menuContainer)
   frame:SetUserData("menu", menuContainer)
-  
+
   container = AceGUI:Create("SimpleGroup")
   container:SetPoint("TOPRIGHT", frame.frame, "TOPRIGHT", -20, -20)
   container:SetPoint("BOTTOMLEFT", menuContainer.frame, "BOTTOMRIGHT", 5, 0)
   container:SetLayout("Flow")
   frame:AddChild(container)
   frame:SetUserData("content", container)
-  
+
   if initItem then
     initItem:Draw(container)
     BestInSlot:CheckTutorials()
   end
-  
+
   local windowpos = BestInSlot.db.char.windowpos
   if windowpos.point then
     frame:ClearAllPoints()
@@ -610,7 +615,7 @@ local function defaultIsShown() return true end
 --  descr = "Description",
 --  draw = drawFunction(),
 --  [width = 100,]
---  [height = 100,] 
+--  [height = 100,]
 --  [close = closeFunction(),]
 --  [isShown = isShownFunction(),]
 -- }
@@ -632,7 +637,7 @@ end
 
 -------------------------------------------------
 -- Functions for add-on wide selection values
--- 
+--
 local selected
 
 function BestInSlot:InitSelectedSettings()
@@ -657,7 +662,7 @@ function BestInSlot:InitSelectedSettings()
 end
 
 function BestInSlot:GetSelected(bisType)
-  if not selected then 
+  if not selected then
     self:InitSelectedSettings()
   end
   if not selected[self.SPECIALIZATION] or selected[self.SPECIALIZATION] == -1 then
@@ -668,7 +673,7 @@ function BestInSlot:GetSelected(bisType)
       if bisType == self.SPECIALIZATION then
         return selected[bisType], type(selected[bisType]) == "string" and self:GetSpecForCustomList(selected[bisType]) or selected[bisType]
       end
-      return selected[bisType] 
+      return selected[bisType]
     else
       error("You supplied an invalid type!")
     end
@@ -723,7 +728,7 @@ function BestInSlot:SetSelected(type, value)
   elseif type == self.RAIDTIER then
     self:SetSelected(self.INSTANCE, self:GetLatest(self.INSTANCE, self.RAIDTIER, value))
   elseif type == self.INSTANCE then
-    if (not selected[self.DIFFICULTY]) or #(self:GetDifficulties(type, selected[type])) < selected[self.DIFFICULTY] then 
+    if (not selected[self.DIFFICULTY]) or #(self:GetDifficulties(type, selected[type])) < selected[self.DIFFICULTY] then
       self:SetSelected(self.DIFFICULTY, self:GetLatest(self.DIFFICULTY, self.INSTANCE, value))
     end
   elseif type == self.SPECIALIZATION then
@@ -757,7 +762,7 @@ local function getDifficultyDropdown(dropdown)
   local raidTierValue = BestInSlot:GetSelected(BestInSlot.RAIDTIER)
   dropdown:SetList(BestInSlot:GetDifficulties(BestInSlot.RAIDTIER, raidTierValue))
   local value = BestInSlot:GetSelected(BestInSlot.DIFFICULTY)
-  dropdown:SetValue(value)  
+  dropdown:SetValue(value)
   dropdown:SetLabel(L["Difficulty"])
   dropdown:SetUserData(BestInSlot.DIFFICULTY, value)
   dropdown:SetUserData(BestInSlot.RAIDTIER, raidTierValue)
@@ -805,7 +810,7 @@ local function getDungeonDropdown(dropdown)
       dropdown:AddItem(name, "    "..name)
       dropdown:SetItemDisabled(name, true)
       lastExpansion = expansion
-      
+
     end
     dropdown:AddItem(instances[i], BestInSlot:GetDescription(BestInSlot.INSTANCE, instances[i]))
   end
@@ -815,7 +820,7 @@ local function getDungeonDropdown(dropdown)
 end
 
 local function dropDownCallback(dropdown, event, value, ...)
-  local udt = dropdown:GetUserDataTable()  
+  local udt = dropdown:GetUserDataTable()
   BestInSlot:SetSelected(udt.type, value)
   if udt.customcallback then udt.customcallback(dropdown, event, value, ...) end
 end
@@ -828,7 +833,7 @@ local dropdownConstructors = {
   [BestInSlot.RAIDTIER] = getRaidTierDropdown,
   [BestInSlot.INSTANCE] = getDungeonDropdown,
   [BestInSlot.DIFFICULTY] = getDifficultyDropdown,
-  [BestInSlot.SPECIALIZATION] = getSpecializationDropdown 
+  [BestInSlot.SPECIALIZATION] = getSpecializationDropdown
 }
 
 local function verifyRequireChange(widget, typeChanged, value)
@@ -889,7 +894,7 @@ end
 
 function BestInSlot:QuickCreate(widgtype, options, addTo, point, ...)
   local result = AceGUI:Create(widgtype)
-  
+
   if options then
     for k,v in pairs(options) do
       if type(v) == "table" then
@@ -899,7 +904,7 @@ function BestInSlot:QuickCreate(widgtype, options, addTo, point, ...)
       end
     end
   end
-  
+
   if addTo then
     if point then
       result:SetPoint(point, addTo.frame, ...)
@@ -918,9 +923,9 @@ function BestInSlot:ShowFrame()
 end
 
 function BestInSlot:ToggleFrame()
-  if not frame then 
+  if not frame then
     self:ShowFrame()
-  else 
+  else
     self:HideFrame()
   end
 end
